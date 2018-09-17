@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="Temperatur Icon">
+    <file>thermometer-measure-temperature-icon-vector-14208472.jpg</file>
+  </qresource>
+  <qresource prefix="Humidity Icon">
+    <file>humidity-icon-weather-sensor-label-260nw-501091582.jpg</file>
+  </qresource>
+</RCC>
