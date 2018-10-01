@@ -6,18 +6,6 @@ from PyQt5.QtCore import QTimer,QTime,QThread,QEventLoop
 from Project1 import Ui_Form
 import matplotlib.pyplot as plt
 
-##class timerThread(QThread):
-##    def collectData(self):
-##        dataObject=AppWindow()
-##        dataObject.getTempHum()
-##
-##    def __init__(self, *args, **kwargs):
-##        QThread.__init__(self, *args, **kwargs)
-##        self.dataCollectionTimer = QTimer()
-##        self.dataCollectionTimer.moveToThread(self)
-##        self.dataCollectionTimer.timeout.connect(self.collectData)
-##        self.dataCollectionTimer.start(1000)
-
 class AppWindow(QDialog):
     def __init__(self):
         super().__init__()
@@ -28,16 +16,17 @@ class AppWindow(QDialog):
         global temp_samples,hum_samples
         temp_samples=[]
         hum_samples=[]
-        deg = 1
+        deg = 1           #default unit
         fah = 0
-        threshold = 35
+        threshold = 35    #default threshold
         temp_count=0
         hum_count=0
         temp_avg=0
         hum_avg=0
         self.show()
-##        self.initTimer()
         self.check()
+
+##      Functionality for Widgets
         self.threshold = QLineEdit()
         self.ui.get_hum.clicked.connect(self.getHum)
         self.ui.get_temp.clicked.connect(self.getTemp)
@@ -50,19 +39,19 @@ class AppWindow(QDialog):
         self.ui.plotGraph.clicked.connect(self.plotGraphs)
         self.ui.exit.clicked.connect(self.close)
 
+#   Timer function to start the timer
     def startTimer(self):
         self.timer=QTimer()
         self.timer.timeout.connect(self.getTempHum)
         self.timer.start(1000)
         self.ui.refresh_checkBox.setChecked(True)
-##    def start_timer(self):
-##        self.timer = timerThread()
-##        self.timer.start()
-    
+        
+#   Timer function to stop the timer
     def stopTimer(self):
         self.timer.stop()
         self.ui.refresh_checkBox.setChecked(False)
   
+#   Function to check if sensor is connected or not
     def check(self):
         humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 4)
 
@@ -75,12 +64,9 @@ class AppWindow(QDialog):
             self.ui.hum.display("")
         else:
             pass
-##            alert=QMessageBox()
-##            alert.autoclose = True
-##            alert.timeout = 2
-##            alert.setText("Sensor detected!!!!!")
-##            alert.exec_()            
         
+#   Function to get temperature values in degree celsius and degree fahrenheit
+#   Also populates the temperature samples list and calculates incremental average
     def getTemp(self):
         global threshold,deg,fah,temp_count,temp_avg
         global temp_samples,temp_count
@@ -102,7 +88,6 @@ class AppWindow(QDialog):
                 temp_samples.append(temperature)
                 deg = 0
                 temp_count += 1
-##                print(temp_count)
                 temp_avg=temp_avg+(temperature-temp_avg)/temp_count
                 temp_avg_display = '{0:.2f}'.format(temp_avg)
                 self.ui.tempAvg.display(temp_avg_display)
@@ -114,7 +99,8 @@ class AppWindow(QDialog):
             else:
                 temp = '{0:.2f}'.format(temperature)
                 self.ui.temp.display(temp)
-                
+            
+            #Check for high temperautre
             if threshold is None:
                 pass
             elif temperature > threshold:
@@ -122,7 +108,9 @@ class AppWindow(QDialog):
                 alert.setIcon(QMessageBox.Warning)
                 alert.setText("High Temperature!!!!!")
                 alert.exec_()
-            
+
+#   Function to get %Humidity values
+#   Also populates the Humidity samples list and calculates incremental average
     def getHum(self):
         global hum_samples,hum_count,hum_avg
         self.check()
@@ -140,11 +128,12 @@ class AppWindow(QDialog):
             self.ui.hum.display(hum)
             hum_samples.append(humidity)
             hum_count +=1
-##            print(hum_count)
             hum_avg=hum_avg+(humidity-hum_avg)/hum_count
             hum_avg_display = '{0:.2f}'.format(hum_avg)
             self.ui.humAvg.display(hum_avg_display)
-        
+
+#   Function to get temperature values in degree celsius and degree fahrenheit, and %Humidity values 
+#   Also populates the temperature,humidity samples list and calculates incremental average
     def getTempHum(self):
         global threshold,temp_count,temp_avg,hum_count,hum_avg
         global hum_samples, temp_samples
@@ -169,16 +158,14 @@ class AppWindow(QDialog):
             temp_samples.append(temperature)
             temp_count += 1
             hum_count +=1
-##            print(temp_count)
-##            print(hum_count)
             temp_avg=temp_avg+(temperature-temp_avg)/temp_count
             hum_avg=hum_avg+(humidity-hum_avg)/hum_count
             hum_avg_display = '{0:.2f}'.format(hum_avg)
             self.ui.humAvg.display(hum_avg_display)
             temp_avg_display = '{0:.2f}'.format(temp_avg)
             self.ui.tempAvg.display(temp_avg_display)
-##            print(type(temp))
-            #Set an alert for high temperautre
+            
+            #Check for high temperautre
             if threshold is None:
                 pass
             elif temperature > threshold:
@@ -186,26 +173,28 @@ class AppWindow(QDialog):
                 alert.setIcon(QMessageBox.Warning)
                 alert.setText("High Temperature!!!!!")
                 alert.exec_()
-        
 
-##        newtime = time.strftime('%m-%d-%y  %H:%M:%S')
-        #self.ui.timeDisplay.setText(newtime)
+#   Function to set threshold based on user input
     def setThreshold(self):
         global threshold
-        threshold, ok = QInputDialog.getInt(self, 'integer Input Dialog', 'Enter Threshold:')
+        input, ok = QInputDialog.getInt(self, 'integer Input Dialog', 'Enter Threshold:')
         if ok:
-            self.threshold.setText(str(threshold))
-            
+            self.threshold.setText(str(input))
+            threshold = input
+
+#   Function to enable degree celsius mode
     def degTemp(self):
         global deg
         deg = 1
         self.getTemp()
-        
+
+#   Function to enable degree Fahrenheit mode
     def fahTemp(self):
         global fah
         fah = 1
         self.getTemp()
-    
+
+#   Function to plot graphs
     def plotGraphs(self):
         global temp_count,hum_count,temp_samples,hum_samples
         x_temp = [(i+1) for i in range(temp_count)]
@@ -223,7 +212,8 @@ class AppWindow(QDialog):
         plt.subplots_adjust(left=0.2, bottom=None, right=None, top=None, wspace=None, hspace=1.0)
         plt.legend()
         plt.show()
-            
+
+#Function for exit
     def close(self):
         sys.exit(app.exec_())
 
