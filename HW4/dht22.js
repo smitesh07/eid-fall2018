@@ -39,11 +39,11 @@ var iid = setInterval(function()
     else 
     {
 	console.log("Lowest Temp %d degF",Math.min(...temp));
-	console.log("Lowest Hum %d %",Math.min(...hum));
+	console.log("Lowest Hum %d%",Math.min(...hum));
 	console.log("Highest Temp %d degF",Math.max(...temp));
-	console.log("Highest Hum %d %",Math.max(...hum));
+	console.log("Highest Hum %d%",Math.max(...hum));
 	console.log("Average Temp %d degF",temp_avg.toFixed(1));
-	console.log("Average Hum %d %",hum_avg.toFixed(1));
+	console.log("Average Hum %d%",hum_avg.toFixed(1));
 	i=0;
 	return;
     }
