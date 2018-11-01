@@ -1,28 +1,28 @@
-Project By Smitesh Modak
+## Project By Smitesh Modak
 
 Project demonstrates development of QT UI for Temperature/Humidity Monitor. DHT22 sensor is being interfaced with Raspberry Pi.
 
 Following Link demonstrates the interface setup between Raspberry Pi and sensor:
 https://github.com/adafruit/Adafruit_Python_DHT
 
-Additional installation:
+### Additional installation:
 sudo apt-get install python3-matplotlib
 (matplotlib is required to be installed as the UI uses the library to plot graphs)
 
-Project Details:
-  Basic Features:
+### Project Details:
+#### Basic Features:
   1. Request current humidity/temperature values from the DHT22.
   2. Display the values of temperature and humidity as well as the time of request.
   3. Alert the user if the sensor is disconnected or dead.
   
-  Additional Features:
+#### Additional Features:
   1. Allow the user to view the temperature value both in degree celsius and degree fahrenheit. 
   2. Retrieve temperature and humidity values at a particular rate using timer.
   3. Calculate and display incremental average of both temperature and humidity values. 
   4. Enable user to set threshold for high temperature alert
   5. Graphical display of plots for temperature and humidity values over the time.
   
-Resources:
+### Resources:
 https://tutorials-raspberrypi.com/raspberry-pi-measure-humidity-temperature-dht11-dht22/
 https://github.com/adafruit/Adafruit_Python_DHT
 https://www.tutorialspoint.com/pyqt/pyqt_qmessagebox.htm
