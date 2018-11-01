@@ -1,0 +1,102 @@
+<!-- @author - Preshit Harlikar, Smitesh Modak -->
+<!-- @reference - https://os.mbed.com/cookbook/Websockets-Server -->
+
+<!doctype html>
+<html>
+  <head>
+    <title>Project 2: Websockets</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+      .divider{
+    	width:15px;
+    	height:auto;
+    	display:inline-block;
+	  }
+      body {
+        text-align: center;
+        min-width: 500px;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="client.js"></script>
+
+  </head>
+
+  <body>
+    <h1>Project 2: WebSockets Client</h1>
+    <!-- Security details section which contains user interface for user name and password  -->
+    <div id="security_details">
+      <br /><label for="Username">Username:</label>
+      <input type="text" id="usernameVal" value="" style="background:rgb(240, 240, 240);"/><br /><br />
+      <label for="Password">Password:</label>
+      <input type="text" id="passwordVal" value="" style="background:rgb(240, 240, 240);"/><br /><br />
+      <!-- <input type="submit" id="signIn" value="Sign In"/><br /> -->
+
+    <!-- Connection details section which contains user interface to enter Host address  -->
+    <div>
+    <div id="connection_details">
+      <label for="host">Host:</label>
+      <input type="text" id="host" value="" style="background:rgb(240, 240, 240);"/><br /><br />
+      <input type="submit" id="open" value="Open"/>
+      <div class="divider"/>
+      <input type="submit" id="close" value="Close"/><br />
+
+    <!-- Value details section which contains user interface to get Current, Average, Highest and Lowest
+     temperature and Humidity Values along with their timestamps. It also includes additional functionalities such as Plotting
+     Real-time graph of temperature and humidity values and to clear all value fields-->
+    </div>
+    <div id="value_details">
+      <br /><label for="curTempVal">Current Temperature:</label>
+      <input type="text" id="curTempVal" value="" style="background:rgb(240, 240, 240);"/><br />
+      <label for="curTempTS">Temperature Time-stamp:</label>
+      <input type="text" id="curTempTS" value="" style="background:rgb(240, 240, 240);"/><br />
+      <input type="submit" id="curTemp" value="Get Current Temperature" /><br /><br />
+
+      <label for="curHumVal">Current Humidity:</label>
+      <input type="text" id="curHumVal" value="" style="background:rgb(240, 240, 240);"/><br />
+      <label for="curHumTS">Humidity Time-stamp:</label>
+      <input type="text" id="curHumTS" value="" style="background:rgb(240, 240, 240);"/><br />
+      <input type="submit" id="curHum" value="Get Current Humidity" /><br /><br />
+
+      <label for="avgTempVal">Average Temperature:</label>
+      <input type="text" id="avgTempVal" value="" style="background:rgb(240, 240, 240);"/><br />
+      <label for="avgTempTS">Average Temperature Time-stamp:</label>
+      <input type="text" id="avgTempTS" value="" style="background:rgb(240, 240, 240);"/><br />
+      <input type="submit" id="avgTemp" value="Get Average Temperature" /><br /><br />
+
+      <label for="avgHumVal">Average Humidity:</label>
+      <input type="text" id="avgHumVal" value="" style="background:rgb(240, 240, 240);"/><br />
+      <label for="avgHumTS">Average Humidity Time-stamp:</label>
+      <input type="text" id="avgHumTS" value="" style="background:rgb(240, 240, 240);"/><br />
+      <input type="submit" id="avgHum" value="Get Average Humidity" /><br /><br />
+
+      <label for="highTempVal">Highest Temperature:</label>
+      <input type="text" id="highTempVal" value="" style="background:rgb(240, 240, 240);"/><br />
+      <label for="highTempTS">Highest Temperature Time-stamp:</label>
+      <input type="text" id="highTempTS" value="" style="background:rgb(240, 240, 240);"/><br />
+      <input type="submit" id="highTemp" value="Get Highest Temperature" /><br /><br />
+
+      <label for="highHumVal">Highest Humidity:</label>
+      <input type="text" id="highHumVal" value="" style="background:rgb(240, 240, 240);"/><br />
+      <label for="highHumTS">Highest Humidity Time-stamp:</label>
+      <input type="text" id="highHumTS" value="" style="background:rgb(240, 240, 240);"/><br />
+      <input type="submit" id="highHum" value="Get Highest Humidity" /><br /><br />
+
+      <label for="lowTempVal">Lowest Temperature:</label>
+      <input type="text" id="lowTempVal" value="" style="background:rgb(240, 240, 240);"/><br />
+      <label for="lowTempTS">Lowest Temperature Time-stamp:</label>
+      <input type="text" id="lowTempTS" value="" style="background:rgb(240, 240, 240);"/><br />
+      <input type="submit" id="lowTemp" value="Get Lowest Temperature" /><br /><br />
+
+      <label for="lowHumVal">Lowest Humidity:</label>
+      <input type="text" id="lowHumVal" value="" style="background:rgb(240, 240, 240);"/><br />
+      <label for="lowHumTS">Lowest Humidity Time-stamp:</label>
+      <input type="text" id="lowHumTS" value="" style="background:rgb(240, 240, 240);"/><br />
+      <input type="submit" id="lowHum" value="Get Lowest Humidity" /><br /><br />
+
+      <input type="submit" id="plot" value="Plot Graph" />
+      <input type="submit" id="clear" value="Clear all" /><br /><br />
+
+    </div>
+  </body>
+</html>
