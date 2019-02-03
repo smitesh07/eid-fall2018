@@ -1,4 +1,4 @@
-   # Project 2 : Remote Websocket/Web Page UI
+   # Remote Websocket/Web Page UI
    
    ### Created By: Preshit Harlikar and Smitesh Modak
   
